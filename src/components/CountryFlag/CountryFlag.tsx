@@ -1,5 +1,5 @@
 'use client';
-import {useMemo} from 'react';
+import {memo} from 'react';
 import Image from 'next/image';
 import {FLAG_COUNTRY_CODES, FLAG_HEIGHT_PX, FLAG_WIDTH_PX} from '@/components/CountryFlag/constants';
 import imageFlags from '../../../public/flags.png';
@@ -8,11 +8,8 @@ export type CountryFlagProps = {
     countryCode: typeof FLAG_COUNTRY_CODES[number];
 };
 
-export default function CountryFlag({countryCode}: CountryFlagProps) {
-    const flagIndex = useMemo(
-        () => FLAG_COUNTRY_CODES.findIndex(code => code === countryCode),
-        [countryCode],
-    );
+export default memo(function CountryFlag({countryCode}: CountryFlagProps) {
+    const flagIndex = FLAG_COUNTRY_CODES.findIndex(code => code === countryCode);
 
     return (
         <div className='relative overflow-hidden bg-black/10' style={{
@@ -24,4 +21,4 @@ export default function CountryFlag({countryCode}: CountryFlagProps) {
             }} src={imageFlags} alt={`${countryCode} flag`}/>}
         </div>
     );
-}
+});
