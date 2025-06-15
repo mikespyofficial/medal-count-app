@@ -12,12 +12,12 @@ export default memo(function CountryFlag({countryCode}: CountryFlagProps) {
     const flagIndex = FLAG_COUNTRY_CODES.findIndex(code => code === countryCode);
 
     return (
-        <div className='relative overflow-hidden bg-black/10' style={{
+        <div className='relative overflow-hidden bg-black/10 ' style={{
             width: `${FLAG_WIDTH_PX}px`,
-            height: `${FLAG_HEIGHT_PX}px`,
+            height: `${FLAG_HEIGHT_PX - 2}px`,
         }}>
             {flagIndex !== -1 && <Image className='relative' style={{
-                top: `${-flagIndex * FLAG_HEIGHT_PX}px`,
+                top: `${-flagIndex * FLAG_HEIGHT_PX - 1}px`,
             }} src={imageFlags} alt={`${countryCode} flag`}/>}
         </div>
     );
