@@ -7,6 +7,14 @@ Notes and assumptions:
 3. Jest and react testing library is used for testing. We won't focus on e2e or multi-browser testing as part of this exercise.
 4. I could have utilized server components more, but currently there's no easy way to test those, so avoided the complexity for this exercise.
 5. I assumed that responsive or resizable country flags is not a requirement.
+6. I could have (and should have) used a dedicated table component or at least split out the individual list items to avoid repetition, but kept things in a single file due to time constraints.
+7. No state management was used, again to keep things simple. State management could have been used to track sorting, instead of relying on props.
+8. UI is an approximation to the original screenshot and not a strict pixel perfect reproduction. Things like spacing, color and fonts might not be accurate. This is purely to stay within the 3 hours.
+9. There are improvements to be made to the loading and error states, both from a technical and UX perspective.
+10. No extensive testing was performed.
+11. Only latest browsers supported.
+
+# NextJs
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
