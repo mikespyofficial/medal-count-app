@@ -38,7 +38,6 @@ describe('CountryFlag', () => {
     });
     it('does not render an image if the country was not found', () => {
         const {container}= render(
-            // @ts-expect-error This country is not supported
             <CountryFlag countryCode='LOL' />,
         );
 

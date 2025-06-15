@@ -5,7 +5,7 @@ import {FLAG_COUNTRY_CODES, FLAG_HEIGHT_PX, FLAG_WIDTH_PX} from '@/components/Co
 import imageFlags from '../../../public/flags.png';
 
 export type CountryFlagProps = {
-    countryCode: typeof FLAG_COUNTRY_CODES[number];
+    countryCode: string;
 };
 
 export default memo(function CountryFlag({countryCode}: CountryFlagProps) {
