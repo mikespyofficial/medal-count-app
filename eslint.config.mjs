@@ -15,15 +15,9 @@ const eslintConfig = [
         rules: {
             semi: 'error',
             quotes: ['error', 'single'],
-            'comma-dangle': ['error', {
-                'arrays': 'never',
-                'objects': 'always',
-                'imports': 'never',
-                'exports': 'never',
-                'functions': 'never',
-            }],
+            'comma-dangle': ['error', 'always-multiline'],
         },
-    }
+    },
 ];
 
 export default eslintConfig;

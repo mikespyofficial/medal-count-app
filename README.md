@@ -1,10 +1,12 @@
 # Medal Count App
 
-Assumptions and decisions:
+Notes and assumptions:
 
 1. Simple folder structure and no component framework is utilized, due to the simplicity of the task and UI.
 2. Tailwind CSS is used here, which is fully compatible with NextJs, including server components. Alternatives exist if utility classes is not a preference.
-3. Jest is used for testing. We won't focus on e2e or multi-browser testing as part of this exercise.
+3. Jest and react testing library is used for testing. We won't focus on e2e or multi-browser testing as part of this exercise.
+4. I could have utilized server components more, but currently there's no easy way to test those, so avoided the complexity for this exercise.
+5. I assumed that responsive or resizable country flags is not a requirement.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
