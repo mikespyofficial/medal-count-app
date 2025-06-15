@@ -1,0 +1,27 @@
+'use client';
+import {useMemo} from 'react';
+import Image from 'next/image';
+import {FLAG_COUNTRY_CODES, FLAG_HEIGHT_PX, FLAG_WIDTH_PX} from '@/components/CountryFlag/constants';
+import imageFlags from '../../../public/flags.png';
+
+export type CountryFlagProps = {
+    countryCode: typeof FLAG_COUNTRY_CODES[number];
+};
+
+export default function CountryFlag({countryCode}: CountryFlagProps) {
+    const flagIndex = useMemo(
+        () => FLAG_COUNTRY_CODES.findIndex(code => code === countryCode),
+        [countryCode],
+    );
+
+    return (
+        <div className='relative overflow-hidden bg-black/10' style={{
+            width: `${FLAG_WIDTH_PX}px`,
+            height: `${FLAG_HEIGHT_PX}px`,
+        }}>
+            {flagIndex !== -1 && <Image className='relative' style={{
+                top: `${-flagIndex * FLAG_HEIGHT_PX}px`,
+            }} src={imageFlags} alt={`${countryCode} flag`}/>}
+        </div>
+    );
+}
