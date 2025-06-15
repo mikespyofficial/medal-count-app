@@ -239,5 +239,27 @@ describe('MedalRankList/utils', () => {
             expect(sortedListDesc[1].code).toBe('FRA');
             expect(sortedListDesc[2].code).toBe('CAN');
         });
+
+        it('sorts without a sort being provided', () => {
+            const list: MedalRank[] = [
+                {
+                    code: 'CAN',
+                    gold: 10,
+                },
+                {
+                    code: 'NED',
+                    gold: 18,
+                },
+                {
+                    code: 'FRA',
+                    gold: 18,
+                },
+            ];
+
+            const sortedListDesc = list.sort((a, b) => medalRankSort(a, b));
+            expect(sortedListDesc[0].code).toBe('CAN');
+            expect(sortedListDesc[1].code).toBe('NED');
+            expect(sortedListDesc[2].code).toBe('FRA');
+        });
     });
 });

@@ -4,10 +4,12 @@ export type MedalRankSortBy = MedalTier | 'total';
 export type MedalRankSortDirection = 'desc' | 'asc';
 
 export type MedalRankProps = {
-    sortBy?: MedalRankSortBy;
+    sort?: MedalRankSortBy;
     sortDirection?: MedalRankSortDirection;
+    onSort?: (sort: MedalRankSortBy) => void;
 };
 
 export type MedalRank = Medal & {
     total: number;
 };
+

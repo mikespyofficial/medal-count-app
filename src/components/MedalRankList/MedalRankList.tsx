@@ -27,14 +27,18 @@ const gridHeadColumnClassNames = [
     'border-gray-500',
 ].join(' ');
 
-export default function MedalRankList({sortBy = 'gold', sortDirection = 'desc'}: MedalRankProps) {
+export default function MedalRankList({sort, sortDirection, onSort}: MedalRankProps) {
     const {value: medalList, isLoading, error} = useMedalQuery();
+
     const medalRankList: MedalRank[] = medalList
         .map(medal => ({
             ...medal,
             total: (medal.gold ?? 0) + (medal.silver ?? 0) + (medal.bronze ?? 0),
         }))
-        .sort((a, b) => medalRankSort(a, b, sortBy, sortDirection));
+        .sort((a, b) => medalRankSort(a, b, sort, sortDirection ?? 'desc'))
+        .slice(0, 10);
+
+    const ariaSortedValue = sortDirection === 'asc' ? 'ascending' : 'descending';
 
     return (<div className='relative w-full'>
             <table
@@ -45,19 +49,47 @@ export default function MedalRankList({sortBy = 'gold', sortDirection = 'desc'}:
 
                 <thead className={gridItemClassNames}>
                 <tr className={gridItemClassNames}>
-                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}><span
-                        className='sr-only'>Position</span></th>
-                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}><span className='sr-only'>Country flag</span>
+                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}>
+                        <span className='sr-only'>Position</span>
                     </th>
-                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}><span className='sr-only'>Country code</span>
+                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}>
+                        <span className='sr-only'>Country flag</span>
                     </th>
-                    <th className={`${gridHeadColumnClassNames} justify-center border-b border-gray-300`}><span
-                        className='sr-only'>Gold</span><MedalBadge medalTier='gold'/></th>
-                    <th className={`${gridHeadColumnClassNames} justify-center border-b border-gray-300`}><span
-                        className='sr-only'>Silver</span><MedalBadge medalTier='silver'/></th>
-                    <th className={`${gridHeadColumnClassNames} justify-center border-b border-gray-300`}><span
-                        className='sr-only'>Bronze</span><MedalBadge medalTier='bronze'/></th>
-                    <th className={`${gridHeadColumnClassNames} justify-center uppercase border-b border-gray-300 text-gray-900 font-normal`}>Total</th>
+                    <th className={`${gridHeadColumnClassNames} border-b border-gray-300`}>
+                        <span className='sr-only'>Country code</span>
+                    </th>
+                    <th
+                        className={`${gridHeadColumnClassNames} ${sort === 'gold' ? 'border-t-2' : ''} justify-center border-b border-gray-300`}
+                        aria-sort={sort === 'gold' ? ariaSortedValue : 'none'}
+                    >
+                        <button type='button' className='cursor-pointer' onClick={() => onSort?.('gold')}>
+                            <span className='sr-only'>Gold, sortable</span><MedalBadge medalTier='gold'/>
+                        </button>
+                    </th>
+                    <th
+                        className={`${gridHeadColumnClassNames} ${sort === 'silver' ? 'border-t-2' : ''} justify-center border-gray-300`}
+                        aria-sort={sort === 'silver' ? ariaSortedValue : 'none'}
+                    >
+                        <button type='button' className='cursor-pointer' onClick={() => onSort?.('silver')}>
+                            <span className='sr-only'>Silver, sortable</span><MedalBadge medalTier='silver'/>
+                        </button>
+                    </th>
+                    <th
+                        className={`${gridHeadColumnClassNames} ${sort === 'bronze' ? 'border-t-2' : ''} justify-center border-gray-300`}
+                        aria-sort={sort === 'bronze' ? ariaSortedValue : 'none'}
+                    >
+                        <button type='button' className='cursor-pointer' onClick={() => onSort?.('bronze')}>
+                            <span className='sr-only'>Bronze, sortable</span><MedalBadge medalTier='bronze'/>
+                        </button>
+                    </th>
+                    <th
+                        className={`${gridHeadColumnClassNames} ${sort === 'total' ? 'border-t-2' : ''} justify-center uppercase border-gray-300 text-gray-900 font-normal`}
+                        aria-sort={sort === 'total' ? ariaSortedValue : 'none'}
+                    >
+                        <button type='button' className='cursor-pointer' onClick={() => onSort?.('total')}>
+                            <span>Total</span><span className='sr-only'>Total, sortable</span>
+                        </button>
+                    </th>
                 </tr>
                 </thead>
 
